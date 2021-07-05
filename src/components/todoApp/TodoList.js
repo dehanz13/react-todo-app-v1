@@ -44,6 +44,7 @@ function TodoList() {
 
   return (
     <>
+      <h1>Todo App</h1>
       <TodoForm onSubmit={addTodo} />
       <Todo
         todos={todos}
