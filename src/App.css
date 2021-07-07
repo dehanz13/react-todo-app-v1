@@ -17,8 +17,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 520px;
-  min-height: 600px;
+  width: 700px;
+  min-height: 650px;
   background: #161a2b;
   text-align: center;
   margin: 128px auto;
@@ -39,6 +39,34 @@ h1 {
 
 .todo-form {
   margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.todo-select {
+  /* margin: 1rem; */
+  position: relative;
+  overflow: hidden;
+  margin-left: 1rem;
+  width: 200px;
+}
+.todo-select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.filter-todo {
+  /* padding: 1rem; */
 }
 
 .todo-input {
@@ -143,5 +171,10 @@ h1 {
 }
 
 .todo-edit-icon {
+  margin-right: 5px;
+  color: #fff;
+}
+
+.todo-complete-icon {
   color: #fff;
 }

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
+  // const [complete, isComplete] = useState(false);
+  const [filteredTodos, setFilteredTodos] = useState([]);
+  const [status, setStatus] = useState("all");
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -40,17 +43,40 @@ function TodoList() {
       return todo;
     });
     setTodos(updatedTodos);
+    // console.log("updated todos = ", updatedTodos);
   };
+
+  const filterHandler = (stat) => {
+    setStatus(stat);
+    switch (stat) {
+      case "completed":
+        setFilteredTodos(todos.filter((todo) => todo.isComplete === true));
+        // console.log(filteredTodos);
+        break;
+      case "uncompleted":
+        setFilteredTodos(todos.filter((todo) => todo.isComplete === false));
+        // console.log(filteredTodos);
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    filterHandler(status);
+  }, [todos, status]);
 
   return (
     <>
       <h1>Todo App</h1>
-      <TodoForm onSubmit={addTodo} />
+      <TodoForm onSubmit={addTodo} setStatus={filterHandler} />
       <Todo
         todos={todos}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
+        filteredTodos={filteredTodos}
       />
     </>
   );

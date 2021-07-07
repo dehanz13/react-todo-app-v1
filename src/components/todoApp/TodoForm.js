@@ -18,39 +18,54 @@ function TodoForm(props) {
     props.onSubmit({
       id: Math.floor(Math.random() * 10000),
       text: input,
+      isComplete: false,
     });
     setInput("");
   };
+  const statusHandler = (e) => {
+    let a = e.target.value;
+    props.setStatus(a);
+  };
+
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
-      {props.edit ? (
-        <>
-          <input
-            type="text"
-            placeholder="Update todo"
-            value={input}
-            name="text"
-            className="todo-input edit"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <button className="todo-button edit">Update</button>
-        </>
-      ) : (
-        <>
-          <input
-            type="text"
-            placeholder="Add a todo"
-            value={input}
-            name="text"
-            className="todo-input"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <button className="todo-button">Add todo</button>
-        </>
-      )}
-    </form>
+    <div className="flex justify-center text-center align-center items-center">
+      <form className="todo-form" onSubmit={handleSubmit}>
+        {props.edit ? (
+          <>
+            <input
+              type="text"
+              placeholder="Update todo"
+              value={input}
+              name="text"
+              className="todo-input edit"
+              onChange={handleChange}
+              ref={inputRef}
+            />
+            <button className="todo-button edit">Update</button>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              placeholder="Add a todo"
+              value={input}
+              name="text"
+              className="todo-input"
+              onChange={handleChange}
+              ref={inputRef}
+            />
+            <button className="todo-button">Add todo</button>
+          </>
+        )}
+        <div className="todo-select">
+          <select onChange={statusHandler} name="todos" className="todo-button">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="uncompleted">Uncompleted</option>
+          </select>
+        </div>
+      </form>
+    </div>
   );
 }
 
