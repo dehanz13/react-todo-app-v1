@@ -5,9 +5,17 @@ import Todo from "./Todo";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-  // const [complete, isComplete] = useState(false);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [status, setStatus] = useState("all");
+
+  //RUN ONCE when the app start
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+  useEffect(() => {
+    filterHandler(status);
+    saveLocalTodos();
+  }, [todos, status]);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -43,7 +51,6 @@ function TodoList() {
       return todo;
     });
     setTodos(updatedTodos);
-    // console.log("updated todos = ", updatedTodos);
   };
 
   const filterHandler = (stat) => {
@@ -63,9 +70,20 @@ function TodoList() {
     }
   };
 
-  useEffect(() => {
-    filterHandler(status);
-  }, [todos, status]);
+  //Save to local
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
+    }
+  };
 
   return (
     <>
