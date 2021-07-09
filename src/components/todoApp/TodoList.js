@@ -10,9 +10,21 @@ function TodoList() {
 
   //RUN ONCE when the app start
   useEffect(() => {
+    const getLocalTodos = () => {
+      if (localStorage.getItem("todos") === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+      } else {
+        // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+        let todoLocal = JSON.parse(localStorage.getItem("todos"));
+        setTodos(todoLocal);
+      }
+    };
     getLocalTodos();
   }, []);
   useEffect(() => {
+    const saveLocalTodos = () => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    };
     filterHandler(status);
     saveLocalTodos();
   }, [todos, status]);
@@ -71,19 +83,19 @@ function TodoList() {
   };
 
   //Save to local
-  const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  };
+  // const saveLocalTodos = () => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // };
 
-  const getLocalTodos = () => {
-    if (localStorage.getItem("todos") === null) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
-    }
-  };
+  // const getLocalTodos = () => {
+  //   if (localStorage.getItem("todos") === null) {
+  //     localStorage.setItem("todos", JSON.stringify([]));
+  //   } else {
+  //     // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //     setTodos(todoLocal);
+  //   }
+  // };
 
   return (
     <>
