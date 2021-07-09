@@ -40,19 +40,6 @@ function TodoList() {
   //   [todos, status]
   // );
 
-  //RUN ONCE when the app start
-  // useEffect(() => {
-  //   const getLocalTodos = () => {
-  //     if (localStorage.getItem("todos") === null) {
-  //       localStorage.setItem("todos", JSON.stringify([]));
-  //     } else {
-  //       // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
-  //       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-  //       setTodos(todoLocal);
-  //     }
-  //   };
-  //   getLocalTodos();
-  // }, []);
   const filterHandler = (stat) => {
     setStatus(stat);
     switch (stat) {
@@ -69,15 +56,28 @@ function TodoList() {
         break;
     }
   };
-  // useEffect(() => {
-  // const saveLocalTodos = () => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // };
-  // filterHandler(status);
-  // saveLocalTodos();
-  // getLocalTodos();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [todos, status]);
+  //RUN ONCE when the app start
+  useEffect(() => {
+    const getLocalTodos = () => {
+      if (localStorage.getItem("todos") === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+      } else {
+        // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+        let todoLocal = JSON.parse(localStorage.getItem("todos"));
+        setTodos(todoLocal);
+      }
+    };
+    getLocalTodos();
+  }, []);
+  useEffect(() => {
+    const saveLocalTodos = () => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    };
+    filterHandler(status);
+    saveLocalTodos();
+    // getLocalTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [todos, status]);
   // }, [todos, status, filterHandler]);
 
   const addTodo = (todo) => {
