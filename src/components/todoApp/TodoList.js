@@ -62,8 +62,7 @@ function TodoList() {
     // saveLocalTodos();
     // getLocalTodos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [todos, status]);
-  }, [todos, status]);
+  }, [todos]);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
