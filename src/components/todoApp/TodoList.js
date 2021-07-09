@@ -53,16 +53,32 @@ function TodoList() {
   //   };
   //   getLocalTodos();
   // }, []);
-
-  useEffect(() => {
-    // const saveLocalTodos = () => {
-    //   localStorage.setItem("todos", JSON.stringify(todos));
-    // };
-    filterHandler(status);
-    // saveLocalTodos();
-    // getLocalTodos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [todos]);
+  const filterHandler = (stat) => {
+    setStatus(stat);
+    switch (stat) {
+      case "completed":
+        setFilteredTodos(todos.filter((todo) => todo.isComplete === true));
+        // console.log(filteredTodos);
+        break;
+      case "uncompleted":
+        setFilteredTodos(todos.filter((todo) => todo.isComplete === false));
+        // console.log(filteredTodos);
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+  // useEffect(() => {
+  // const saveLocalTodos = () => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // };
+  // filterHandler(status);
+  // saveLocalTodos();
+  // getLocalTodos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [todos, status]);
+  // }, [todos, status, filterHandler]);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -100,22 +116,22 @@ function TodoList() {
     setTodos(updatedTodos);
   };
 
-  const filterHandler = (stat) => {
-    setStatus(stat);
-    switch (stat) {
-      case "completed":
-        setFilteredTodos(todos.filter((todo) => todo.isComplete === true));
-        // console.log(filteredTodos);
-        break;
-      case "uncompleted":
-        setFilteredTodos(todos.filter((todo) => todo.isComplete === false));
-        // console.log(filteredTodos);
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  };
+  // const filterHandler = (stat) => {
+  //   setStatus(stat);
+  //   switch (stat) {
+  //     case "completed":
+  //       setFilteredTodos(todos.filter((todo) => todo.isComplete === true));
+  //       // console.log(filteredTodos);
+  //       break;
+  //     case "uncompleted":
+  //       setFilteredTodos(todos.filter((todo) => todo.isComplete === false));
+  //       // console.log(filteredTodos);
+  //       break;
+  //     default:
+  //       setFilteredTodos(todos);
+  //       break;
+  //   }
+  // };
 
   //Save to local
   // const saveLocalTodos = () => {

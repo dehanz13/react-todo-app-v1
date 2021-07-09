@@ -24,7 +24,8 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo, filteredTodos }) {
   if (edit.id) {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
-  return filteredTodos.map((todo, index) => {
+  // return filteredTodos.map((todo, index) => {
+  return todos.map((todo, index) => {
     return (
       <div
         className={todo.isComplete ? "todo-row complete" : "todo-row"}

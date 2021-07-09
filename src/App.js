@@ -1,6 +1,6 @@
 import "./App.css";
 import TodoList from "./components/todoApp/TodoList";
-import NotesAppList from "./components/notesApp/notesAppList";
+// import NotesAppList from "./components/notesApp/notesAppList";
 
 function App() {
   return (
