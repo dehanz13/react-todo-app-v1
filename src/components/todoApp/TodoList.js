@@ -8,26 +8,61 @@ function TodoList() {
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [status, setStatus] = useState("all");
 
+  // const saveLocalTodos = React.useCallback(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
+  // const getLocalTodos = React.useCallback(() => {
+  //   if (localStorage.getItem("todos") === null) {
+  //     localStorage.setItem("todos", JSON.stringify([]));
+  //   } else {
+  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //     setTodos(todoLocal);
+  //   }
+  // }, []);
+
+  // const filterHandler = React.useCallback(
+  //   (stat) => {
+  //     setStatus(stat);
+  //     switch (stat) {
+  //       case "completed":
+  //         setFilteredTodos(todos.filter((todo) => todo.isComplete === true));
+  //         // console.log(filteredTodos);
+  //         break;
+  //       case "uncompleted":
+  //         setFilteredTodos(todos.filter((todo) => todo.isComplete === false));
+  //         // console.log(filteredTodos);
+  //         break;
+  //       default:
+  //         setFilteredTodos(todos);
+  //         break;
+  //     }
+  //   },
+  //   [todos, status]
+  // );
+
   //RUN ONCE when the app start
+  // useEffect(() => {
+  //   const getLocalTodos = () => {
+  //     if (localStorage.getItem("todos") === null) {
+  //       localStorage.setItem("todos", JSON.stringify([]));
+  //     } else {
+  //       // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+  //       let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //       setTodos(todoLocal);
+  //     }
+  //   };
+  //   getLocalTodos();
+  // }, []);
+
   useEffect(() => {
-    const getLocalTodos = () => {
-      if (localStorage.getItem("todos") === null) {
-        localStorage.setItem("todos", JSON.stringify([]));
-      } else {
-        // let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
-        let todoLocal = JSON.parse(localStorage.getItem("todos"));
-        setTodos(todoLocal);
-      }
-    };
-    getLocalTodos();
-  }, []);
-  useEffect(() => {
-    const saveLocalTodos = () => {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    };
+    // const saveLocalTodos = () => {
+    //   localStorage.setItem("todos", JSON.stringify(todos));
+    // };
     filterHandler(status);
-    saveLocalTodos();
+    // saveLocalTodos();
+    // getLocalTodos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [todos, status]);
   }, [todos, status]);
 
   const addTodo = (todo) => {
